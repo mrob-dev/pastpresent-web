@@ -29,11 +29,13 @@ in `styles.css`; there is no build step.
 ## Assets
 
 - `assets/logo*.png` — app mark.
-- `assets/screenshots/` — the gallery images. **These are currently the shipped
-  app's real UI screenshots** (copied from the Flutter repo's
-  `design/pastpresent-kotlin/`). To use your curated store_studio exports,
-  drop them into this folder and update the `<img src>` filenames + captions in
-  `index.html` (hero `#hero__device` and the `#gallery` figures).
+- `assets/promo/` — the four composed **1080×1920 store panels** (store_studio
+  exports) shown in the `#gallery`. They already include device frames and
+  headlines, so they're displayed full-bleed (no CSS bezel/caption). To add or
+  reorder, drop the PNGs here and edit the `.panel` figures in `index.html`.
+- `assets/screenshots/camera.jpg` — a clean raw screenshot used only for the
+  hero device frame (kept separate because the hero has its own headline that
+  would clash with the panels' baked-in copy).
 
 ## Store links
 
