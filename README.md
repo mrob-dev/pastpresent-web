@@ -57,6 +57,30 @@ in `styles.css`; there is no build step.
    Follow Vercel's DNS instructions at your registrar (an `A` record to Vercel,
    or set the nameservers / a `CNAME` for `www`). HTTPS is automatic.
 
+## Deploy via Hostinger (import from GitHub)
+
+This repo also works on Hostinger shared/cloud hosting — it's a static site, so
+there's no build step.
+
+1. hPanel → your website → **Advanced → GIT**.
+2. **Create a new repository:**
+   - Repository: `https://github.com/mrob-dev/pastpresent-web.git`
+   - Branch: `main`
+   - Install path: leave blank / `public_html` (the repo root becomes the web root).
+   *(Public repo, so no deploy key needed. For a private repo, add Hostinger's
+   SSH key to GitHub → repo Settings → Deploy keys.)*
+3. Click **Create**, then **Deploy** to pull the files into `public_html`.
+4. **Auto-deploy on push (optional):** copy the webhook URL Hostinger shows and
+   add it in GitHub → repo **Settings → Webhooks**. Pushes then redeploy
+   automatically; otherwise click **Deploy** in hPanel after each change.
+5. Point `pastpresent.guide` at the hosting (hPanel → Domains) and enable the
+   free SSL certificate.
+
+**Important:** `vercel.json` is ignored by Hostinger. The included **`.htaccess`**
+provides the equivalent on Apache/LiteSpeed — clean URLs (`/privacy` →
+`privacy.html`), the legacy redirects, security headers, HTTPS, and asset
+caching. Keep it at the repo root or `/privacy`, `/support`, `/terms` will 404.
+
 ## Note — in-app privacy link
 
 The app currently points its in-app "Privacy Policy" link and (likely) the Play

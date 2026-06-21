@@ -1,0 +1,42 @@
+# PastPresent static site — Apache / LiteSpeed (Hostinger) config.
+# Mirrors vercel.json so the SAME repo deploys correctly on either host:
+# Vercel ignores this .htaccess; Apache/LiteSpeed ignore vercel.json.
+
+Options -Indexes
+DirectoryIndex index.html
+
+RewriteEngine On
+
+# --- Force HTTPS ------------------------------------------------------------
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# --- Legacy-path redirects (match vercel.json) ------------------------------
+RewriteRule ^pastpresent/privacy/?$ /privacy [R=301,L]
+RewriteRule ^pastpresent/?$ / [R=301,L]
+RewriteRule ^privacy-policy/?$ /privacy [R=301,L]
+
+# --- Clean URLs: send /foo.html -> /foo (canonical, no .html in the bar) -----
+RewriteCond %{THE_REQUEST} \s/+([^?\s]+)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# --- Clean URLs: internally serve /foo from /foo.html when it exists ---------
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.+?)/?$ /$1.html [L]
+
+# --- Security headers (match vercel.json) -----------------------------------
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), camera=(), microphone=()"
+  Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+</IfModule>
+
+# --- Cache static assets for a year -----------------------------------------
+<IfModule mod_headers.c>
+  <FilesMatch "\.(?:css|js|png|jpe?g|webp|gif|svg|woff2?|ico)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
