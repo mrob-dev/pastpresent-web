@@ -158,6 +158,39 @@ a:hover { color: var(--gold-deep); }
   padding: 0.4rem 0.9rem; border-radius: 0.4rem; font-size: 0.92rem; box-shadow: var(--shadow-soft);
 }
 
+/* hero then/now slideshow — square archival "print" with a crossfade */
+.hero-photo { width: min(400px, 100%); margin-inline: auto; }
+.hero-stage {
+  position: relative; width: 100%; aspect-ratio: 1 / 1; overflow: hidden;
+  border-radius: 12px; border: 1px solid var(--border); background: var(--ink);
+  box-shadow: var(--shadow-device);
+  transform: rotate(-1.4deg); transition: transform 0.5s var(--ease);
+}
+.hero-photo:hover .hero-stage { transform: rotate(0deg) translateY(-3px); }
+.hero-stage::after { /* gold hairline mount */
+  content: ""; position: absolute; inset: 0; border-radius: 12px; pointer-events: none;
+  border: 1px solid rgba(200, 168, 78, 0.30);
+}
+.hero-slide {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: 0;
+}
+.hero-slide:first-child { opacity: 1; } /* static fallback (reduced motion / no CSS-anim) */
+.hero-photo__cap { margin-top: 1.1rem; text-align: center; font-size: 0.95rem; color: var(--muted); }
+.hero-photo__cap .serif-italic { color: var(--gold-text); font-size: 1.1rem; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-slide { animation: heroFade 22.5s linear infinite; animation-delay: calc(var(--i) * 4.5s); }
+  .hero-slide:first-child { opacity: 0; } /* hand control to the animation */
+}
+@keyframes heroFade {
+  0%    { opacity: 0; }
+  1.8%  { opacity: 1; }
+  18%   { opacity: 1; }
+  20%   { opacity: 0; }
+  100%  { opacity: 0; }
+}
+
 @media (max-width: 860px) {
   .hero__grid { grid-template-columns: 1fr; }
   .hero__visual { order: -1; }

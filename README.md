@@ -33,9 +33,11 @@ in `styles.css`; there is no build step.
   exports) shown in the `#gallery`. They already include device frames and
   headlines, so they're displayed full-bleed (no CSS bezel/caption). To add or
   reorder, drop the PNGs here and edit the `.panel` figures in `index.html`.
-- `assets/screenshots/camera.jpg` — a clean raw screenshot used only for the
-  hero device frame (kept separate because the hero has its own headline that
-  would clash with the panels' baked-in copy).
+- `assets/hero/` — five 400×400 then/now Berlin composites shown as a CSS
+  crossfade slideshow in the hero (`.hero-stage`). Displayed at their native
+  400×400 (never upscaled); on reduced-motion or no-CSS-animation they fall back
+  to the first image. To change them, drop 400×400 files here and edit the
+  `.hero-slide` list in `index.html` (the `--i` index sets the order).
 
 ## Store links
 
