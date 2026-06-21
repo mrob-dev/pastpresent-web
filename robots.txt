@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://pastpresent.app/sitemap.xml
+Sitemap: https://pastpresent.guide/sitemap.xml

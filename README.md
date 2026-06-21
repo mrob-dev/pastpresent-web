@@ -5,7 +5,7 @@ app by Berlin Experiences. Built as a zero-dependency static site so it deploys
 anywhere instantly and the privacy/support URLs (required by both app stores)
 always resolve.
 
-**Live domain:** https://pastpresent.app
+**Live domain:** https://pastpresent.guide
 
 ## Pages
 
@@ -47,13 +47,13 @@ in `styles.css`; there is no build step.
   blocks (hero + CTA band) with an `<a class="badge" href="https://apps.apple.com/app/idXXXXXXXXX">`
   and delete the `<span class="badge__flag">Soon</span>`.
 
-## Deploy to Vercel + connect pastpresent.app
+## Deploy to Vercel + connect pastpresent.guide
 
 1. Push this repo to GitHub (done).
 2. In Vercel: **Add New → Project → Import** this GitHub repo. Framework preset:
    **Other** (it's static — no build command, output is the repo root).
 3. Deploy. You'll get a `*.vercel.app` URL to verify.
-4. **Project → Settings → Domains → Add `pastpresent.app`** (and `www.pastpresent.app`).
+4. **Project → Settings → Domains → Add `pastpresent.guide`** (and `www.pastpresent.guide`).
    Follow Vercel's DNS instructions at your registrar (an `A` record to Vercel,
    or set the nameservers / a `CNAME` for `www`). HTTPS is automatic.
 
@@ -63,12 +63,12 @@ The app currently points its in-app "Privacy Policy" link and (likely) the Play
 Console privacy URL at `https://www.berlinexperiences.com/pastpresent/privacy`.
 Once this site is live, either:
 
-- repoint those to `https://pastpresent.app/privacy` (in the app's
+- repoint those to `https://pastpresent.guide/privacy` (in the app's
   `landing_screen.dart` and in the Play Console / App Store Connect privacy
   fields), **or**
 - add a redirect from the old path to here.
 
-`vercel.json` already redirects `pastpresent.app/pastpresent/privacy → /privacy`
+`vercel.json` already redirects `pastpresent.guide/pastpresent/privacy → /privacy`
 in case anything hits the old path on this domain.
 
 ## Local preview
